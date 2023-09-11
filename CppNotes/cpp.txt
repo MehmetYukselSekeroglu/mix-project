@@ -1,0 +1,143 @@
+C++ 
+###################################
+KAÇIŞ KARAKTERLERİ: 
+
+
+> stringlerde kullanılırlar 
+> \n -> alt satıra geçer 
+> \t -> 1 tab boşluk bırakır 
+> \a -> bilgisayardan bir bip sesi gelir 
+> \ -> önüne gelen krakterin özel olmasını engeller veya özellik katar 
+
+###################################
+RAW STRİNG:
+tring mesaj = R"(buraya yazılan herşey raw olarak yazılır \n \a \t özel karakter olarak çalışmazlar)";
+
+###################################
+const TİPİ DEĞİŞKEN:
+
+> bazı değişkenlerinin değerlerini değiştirilmesini istemeyiz ozamanlarda bunu kullanırız 
+> const int = 0; 
+gibi
+
+#####################################
+static_cast İLE DEĞİŞKEN TİP DÖNÜŞÜMLERİ:
+
+double degisken_1 = 3.8;
+int degisken_2 = static_cast<int>(degisken_1);
+> degisken_1 i int bir değere çevirip degisken_2 ye atadık 
+
+######################################
+
+y = ++x; -> önce atama yp sonra arttır
+y = x++; önce arttır sonr atama yap
+
+#######################################
+DO WHİLE DONGUSU:
+>
+do 
+{
+	komutlar
+}
+while (koşul);
+> koşul doğru oldukça sürekli devam eder normal while dan farkı en az 1 kez kod çalışacaktır 
+
+#########################################
+
+C++ 17 ile GELEN ÖZELLİK:
+
+if (int i = rand(); i % 2 == 0){
+	cout << i << "cift sayıdır" << endl;
+}else{
+	cout << i << "tek sayıdır" << endl;
+}
+> yukarıdaki gibi değişkeni direk koşul öncesi oluşturabiliriz 
+bu sayede işlerimiz kolaylaştıracaktır 
+> bu durumu aynı şekilde swtich case yapılarındada kullanabilmekteyiz 
+
+$ uyarı INSERT tuşu idelerde imleç değiştirir 
+##########################################
+
+-FONKSİYONLAR:
+> fonksiyonlar neden önemli?
+
+> kodumuzu kısaltmak ve daha okunaklı yapmak bakımını kolaylaştırmak için 
+fonksiyonlar çok onemlidir 
+> sürekli tekrar eden kodlardan kurtulmamızı sağlar 
+
+#############################################
+
+-ÖNCEDEN TANIMLANMIŞ FONKSİYONLAR:
+cmath ve cstdlib kütüphanelerini include ediyoruz
+
+> sqrt(9) -> 9 un karekökünü alır 
+> pow(9,2) -> 9 un karesini alır 3 vs de yaılabilir 
+> exit(1) -> programı sonlandırır 
+
+#################################################
+
+-TEMEL VOİD FONKSİYONU TANIMLAMA:
+
+void yazdır(void /*burasıda arguman almıcak demektir*/){
+	cout << "merhaba" << endl;
+	}
+buradaki void demek bize işlemler bitinde değer döndürmeyecek demektir 
+
+şu şekildede tanımlanabnilir 
+
+void yazdir(); // ; ü unutmamak lazım!
+
+int main(){
+	// kodlar 
+	yazdir()
+}
+
+void yazdir(){
+	cout << "hello word" << endl;
+}
+
+yukarıda işleme fonksiyon prototipi ile kullanmak demektir eğer 
+üst kısımda tanımlanmaz ise bu fonksiyon derleme esnasında hata verir 
+
+########################################################################
+
+-DEĞER DÖNDÜREN FONKSİYONLAR:
+
+> bu sefer döndüreceğimiz değer tipinde bir fonksiyon tanımlalamız lazım 
+
+int test (){
+	int sayi;
+	return sayi*sayi; -> gibi değer döndürürler 	
+}
+int x = test() şeklinde değer atanabilir birbirine 
+
+############################################################################
+
+-GLOBAL-LOCAL DEĞİŞKENLER STATİC LOKAL DEĞİŞKENLER:
+> lokal değişkenler süslü parantezler arasında tanımlanan değişkenlerdir 
+int main(){
+	// burada tanımlanan değişkenler lokaldir 
+}
+
+> global değişkenler ise bu süslü parantezlerin dışında programımızın üst kısmında yer alan
+değişkenlerdir 
+
+NOT: değişkenler tanımlandıkları scope larda yani süslü parantezler arasında ulaşılabilirdir 
+bir fonksiyonda tanımlı olan bir değişken main içerisinde kullanılamaz mesela 
+
+> global değişkenler ise her yerden erişilebilirlerdir 
+main içinde çağırıp değeri değiştirirsek fonksiyon içindede değiştirilmiş değer ile erişilir 
+
+{
+	// bu alana scopa alanı denmektedir 
+}
+
+STATİC LOKAL DEĞİŞKENLER:
+> değişkenlerimizin bizim tanımladığımız fonksiyon haricinde kullanılmaması ama aynı
+zamanda fonksiyon sonlandğı zaman değişkenimizin silinmemesini sağlar program bittiği
+ zaman silinirler 
+
+static int a = 0; şeklinde tanımlanabilmektedir 
+
+############################################################################################
+
