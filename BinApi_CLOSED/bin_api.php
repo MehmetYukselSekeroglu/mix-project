@@ -7,7 +7,7 @@ $db_username="root";
 $db_passowrd="";
 $db_name="cc_bins";
 
-$developed_by="illegalXdark";
+$developed_by="BayTapsan";
 
 
 $link = new mysqli($hostname_is,  $db_username, $db_passowrd, $db_name);
@@ -39,7 +39,7 @@ if (isset($_GET)) {
         $result->execute();
         $result = $result->get_result();
 
-	else {
+    }else {
             echo json_encode(["success" => "false", "message" => "param error","by"=>$developed_by]);
             die();
         }
