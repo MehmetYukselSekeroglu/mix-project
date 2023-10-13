@@ -4,9 +4,10 @@ import os
 from pydub import AudioSegment
 import sys
 
+
 """
     
-    03.09.2023 SIGNT Türk VAW2MP3 
+    03.09.2023 SIGINT Türk VAW2MP3 
     SDR yazılımları ile kadedilen sesleri mp3 e dömüştürmek için basit bir betik 
 
 
@@ -17,7 +18,48 @@ import sys
 
 
 
-print(f"\n>> Powered By SIGNT Türk\n\n")
+# COLOR CODES
+
+siyah = "\033[30m"
+kirmizi = "\033[31m"
+yeşil = "\033[32m"
+sari= "\033[33m"
+mavi = "\033[34m"
+mor = "\033[35m"
+turkuaz = "\033[36m"
+beyaz = "\033[37m"
+
+# BOLD TYPE CODES
+
+normal = "\033[0m"
+kalin = "\033[1m"
+
+
+
+
+
+def INFO_OUT(target_msg:str) -> None:
+    template = f"{kalin}{beyaz}[ {mavi}INFO{beyaz} ]{normal}: {target_msg}"
+    print(template)
+
+def ERR_OUT(target_msg:str) -> None:
+    template = f"{kalin}{beyaz}[ {kirmizi}ERROR{beyaz} ]{normal}: {target_msg}"
+    print(template)
+
+def WARN_OUT(target_msg:str) -> None:
+    template = f"{kalin}{beyaz}[ {turkuaz}WARNING{beyaz} ]{normal}: {target_msg}"
+    print(template)
+
+
+def STD_LOG_OUT(target_msg:str) -> None:
+    template = f"{kalin}{beyaz}[ LOG ]{normal}: {target_msg}"
+    print(template)
+
+
+
+
+
+print(f"\n{kalin}{mavi}>> Powered By SIGINT Türk\n\n{normal}{beyaz}")
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-i",required=True,help="path of input file")
@@ -70,15 +112,15 @@ def ConvertAnyAudio_to_wav(target_file_path:str, output_names:str):
 
 
 
-print(f"[ INFO ]: Converting started")
+INFO_OUT("Converting started")
 data_is = ConvertAnyAudio_to_wav(target_file_path=target_file, output_names=output_name)
 
 
 if data_is["success"] != "true":
     err_msg = data_is["code"]
-    print(f"[ ERROR ]: {err_msg}")
+    ERR_OUT(f"{err_msg}")
     sys.exit(1)
 
 path_is = data_is["path"]
-print(f"[ INFO ]: Converting success: {path_is}")
+INFO_OUT(f"Converting success: {path_is}")
 sys.exit(0)
