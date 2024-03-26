@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <iostream>
-#include "console_tools.h"
-#include "time_tools.h"
+#include "console_tools.hpp"
+#include "time_tools.hpp"
 
 
 void p_info(const std::string& targetText){

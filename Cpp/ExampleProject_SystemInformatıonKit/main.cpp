@@ -3,10 +3,10 @@
 #include <ctime>
 #include <fstream>
 #include <filesystem>
-#include "include/console_tools.h"
-#include "include/variables.h"
-#include "include/time_tools.h"
-#include "include/system_info.h"
+#include "include/console_tools.hpp"
+#include "include/variables.hpp"
+#include "include/time_tools.hpp"
+#include "include/system_info.hpp"
 
 int main(int argc, char* argv[]){
     setlocale(LC_ALL, "Turkish");

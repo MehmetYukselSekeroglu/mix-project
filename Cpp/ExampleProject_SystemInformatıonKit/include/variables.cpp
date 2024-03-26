@@ -1,6 +1,6 @@
 #include <iostream>
 #include <string>
-#include "variables.h"
+#include "variables.hpp"
 
 const std::string HELP_MENU = "Low Energy LocalSystems Help Menu \n\
 ARGS:   --system-info   :: Get System Informatiın \n\

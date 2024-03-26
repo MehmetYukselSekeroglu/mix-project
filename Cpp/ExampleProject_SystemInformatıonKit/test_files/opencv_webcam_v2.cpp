@@ -1,14 +1,11 @@
 #include <opencv4/opencv2/opencv.hpp>
+#include <opencv4/opencv2/core/utils/logger.hpp>
 #include <stdio.h>
 #include <iostream>
 #include <ctime>
 #include <chrono>
-#include <filesystem>
+#include <cstdlib>
 
-
-
-// Bu alan ekrana standart bilgileri daha temiz yazdırmak içindir direk alt kısma geçilebilir
-// ********** OTOMATIK ALAN - GECINIZ **********
 std::string getCurrentTime(void){
     auto now = std::chrono::system_clock::now();
     std::time_t  currentTime = std::chrono::system_clock::to_time_t(now);
@@ -35,35 +32,58 @@ void p_log(const std::string& targetText){
     printf("[ %s ] [ LOG ]: %s \n", a_time.c_str(), targetText.c_str());
 }
 
-// ********** otomatik alan bitti **********
-
 
 
 int main(int argc, char const *argv[])
 {
-    setlocale(LC_ALL, "Turkish"); 
-    if ((argc - 1) == 0){
-        p_error("Invalid Args, Use --help");
-        return -1;
+    
+    unsigned short int cameraID = 0;
+    char keyInput;
+
+    cv::Size VideoResulation(1240,480);
+
+    setlocale(LC_ALL, "Turkish");
+
+    cv::utils::logging::setLogLevel(cv::utils::logging::LogLevel::LOG_LEVEL_SILENT);
+    cv::VideoCapture videoSource(cameraID);
+    cv::Mat currentFrame;
+
+
+    p_info("Starting live stream...");
+    while (true){
+        videoSource.read(currentFrame);
+ 
+        if (currentFrame.empty()){
+            p_info("End of the stream, exiting...");
+            return 0;
+        }
+        cv::putText(currentFrame, getCurrentTime(),
+                cv::Point(VideoResulation.width - VideoResulation.width * 0.999,
+                VideoResulation.height - VideoResulation.height * 0.01 ),
+                cv::FONT_HERSHEY_SIMPLEX, 0.8, cv::Scalar(0, 255, 0), 2.2);
+        cv::resize(currentFrame, currentFrame,VideoResulation);
+        cv::imshow("Live Stream",currentFrame);
+        keyInput = (char)cv::waitKey(1);
+
+        if (keyInput == 'q'){
+            p_info("Q keyword detected, exiting...");
+            break;
         }
 
-    const static std::filesystem::path TargetImagePath = argv[1];
-    if (! std::filesystem::is_regular_file(TargetImagePath)){
-        p_error("Invalid image path, app.run /path/to/my_image.png");
-        return -1;
+
     }
-    
-    p_info("Reading your image via opencv...");
-    cv::Mat readedImageData = cv::imread(TargetImagePath.string());
-    
-    p_info("Read successfuly, Resizing image...");
-    cv::resize(readedImageData,readedImageData, cv::Size(400,400),0,0,1);
-
-    p_info("Successfuly, putting a text...");
-    cv::putText(readedImageData,"putText example",cv::Point(35,35), cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(0, 255, 0), 1);
-
-    p_info("Showing your image...");
-    cv::imshow("The Target Image", readedImageData);
-    cv::waitKey(0);
     return 0;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+

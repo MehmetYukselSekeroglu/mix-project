@@ -2,9 +2,9 @@
 #include <unistd.h>
 #include <iostream>
 
-#include "system_info.h"
-#include "time_tools.h"
-#include "conversions.h"
+#include "system_info.hpp"
+#include "time_tools.hpp"
+#include "conversions.hpp"
 
 void printSystemInformation(void){
     struct sysinfo a_sysinfo;

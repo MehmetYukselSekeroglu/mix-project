@@ -1,7 +1,7 @@
 #include <ctime>
 #include <chrono>
 
-#include "time_tools.h"
+#include "time_tools.hpp"
 
 std::string getCurrentTime(void){
     auto now = std::chrono::system_clock::now();
